@@ -1,0 +1,2 @@
+[proxmox]
+gamora ansible_host=192.168.1.15 ansible_user=root

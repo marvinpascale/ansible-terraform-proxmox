@@ -1,0 +1,20 @@
+#!/bin/bash
+set -o errexit
+
+if [ ! -f /tmp/focal-server-cloudimg-amd64.img ];then
+  wget -P /tmp -N https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
+fi
+
+qm create {{id}} --name "{{name}}" --memory 1024 --net0 virtio,bridge={{bridge}}
+
+qm importdisk {{id}} /tmp/focal-server-cloudimg-amd64.img {{storage}} -format qcow2
+
+qm set {{id}} --scsihw virtio-scsi-pci --scsi0 {{storage}}:{{id}}/vm-{{id}}-disk-0.qcow2
+
+qm set {{id}} --ide2 {{storage}}:cloudinit
+
+qm set {{id}} --boot c --bootdisk scsi0
+
+qm set {{id}} --serial0 socket --vga serial0
+
+qm template {{id}}
