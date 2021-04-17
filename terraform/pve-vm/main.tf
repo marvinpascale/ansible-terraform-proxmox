@@ -16,6 +16,8 @@ resource "proxmox_vm_qemu" "pve_vm" {
 
   clone = var.os_template_id
 
+  agent = 1
+
   os_type = "cloud-init"
   cores   = var.cores
   memory  = var.memory

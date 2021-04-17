@@ -7,6 +7,7 @@ module "ubuntu" {
   target_br    = "vmbr0"
   target_node  = "gamora"
   storage      = "qnap_nfs"
+  pool         = "terraform"
 
   pm_api_url   = var.pm_api_url
   pm_user      = var.pm_user
@@ -24,6 +25,7 @@ module "web-server" {
   target_br    = "vmbr0"
   target_node  = "gamora"
   storage      = "qnap_nfs"
+  pool         = "terraform"
 
   pm_api_url   = var.pm_api_url
   pm_user      = var.pm_user
